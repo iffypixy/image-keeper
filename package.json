@@ -1,0 +1,11 @@
+{
+  "name": "image-keeper",
+  "version": "0.1.0",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.0.3"
+  }
+}

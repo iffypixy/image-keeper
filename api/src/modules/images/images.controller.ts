@@ -83,7 +83,7 @@ export class ImagesController {
     };
   }
 
-  @Delete(":id/remove")
+  @Delete(":id")
   removeImage(@Query("id") id: string, @Session() session: SessionWithData) {
     const image = session.images?.find((image) => image.id === id);
 

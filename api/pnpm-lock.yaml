@@ -17,6 +17,9 @@ dependencies:
   express-session:
     specifier: ^1.17.3
     version: 1.17.3
+  multer:
+    specifier: 1.4.5-lts.1
+    version: 1.4.5-lts.1
   reflect-metadata:
     specifier: ^0.1.13
     version: 0.1.13
@@ -37,6 +40,9 @@ devDependencies:
   '@types/express-session':
     specifier: ^1.17.8
     version: 1.17.8
+  '@types/multer':
+    specifier: ^1.4.7
+    version: 1.4.7
   '@types/node':
     specifier: ^20.3.1
     version: 20.3.1
@@ -502,6 +508,12 @@ packages:
 
   /@types/mime@3.0.1:
     resolution: {integrity: sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==}
+    dev: true
+
+  /@types/multer@1.4.7:
+    resolution: {integrity: sha512-/SNsDidUFCvqqcWDwxv2feww/yqhNeTRL5CVoL3jU4Goc4kKEL10T7Eye65ZqPNi4HRx8sAEX59pV1aEH7drNA==}
+    dependencies:
+      '@types/express': 4.17.17
     dev: true
 
   /@types/node@20.3.1:
@@ -2253,6 +2265,19 @@ packages:
 
   /multer@1.4.4-lts.1:
     resolution: {integrity: sha512-WeSGziVj6+Z2/MwQo3GvqzgR+9Uc+qt8SwHKh3gvNPiISKfsMfG4SvCOFYlxxgkXt7yIV2i1yczehm0EOKIxIg==}
+    engines: {node: '>= 6.0.0'}
+    dependencies:
+      append-field: 1.0.0
+      busboy: 1.6.0
+      concat-stream: 1.6.2
+      mkdirp: 0.5.6
+      object-assign: 4.1.1
+      type-is: 1.6.18
+      xtend: 4.0.2
+    dev: false
+
+  /multer@1.4.5-lts.1:
+    resolution: {integrity: sha512-ywPWvcDMeH+z9gQq5qYHCCy+ethsk4goepZ45GLD63fOu0YcNecQxi64nDs3qluZB+murG3/D4dJ7+dGctcCQQ==}
     engines: {node: '>= 6.0.0'}
     dependencies:
       append-field: 1.0.0

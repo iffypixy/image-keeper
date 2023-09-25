@@ -1,10 +1,15 @@
 import {Module} from "@nestjs/common";
+import {ConfigModule} from "@nestjs/config";
 
-import {AppController} from "./app.controller";
+import {ImagesModule} from "@modules/images";
 
 @Module({
-  imports: [],
-  controllers: [AppController],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    ImagesModule,
+  ],
 })
 export class AppModule {}
 

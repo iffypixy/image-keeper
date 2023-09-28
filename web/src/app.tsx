@@ -40,7 +40,7 @@ export const App: React.FC = () => {
         id: nanoid(),
         url: URL.createObjectURL(file),
         size: file.size,
-        date: Math.floor(Math.random() * Date.now()),
+        date: Date.now(),
         label: "",
         progress: 0,
       };
@@ -65,7 +65,9 @@ export const App: React.FC = () => {
         .then((res) => {
           setImages((images) =>
             images.map((img) =>
-              img.id === image.id ? {...res.data.image, progress: 100} : img,
+              img.id === image.id
+                ? {...res.data.image, url: img.url, progress: 100}
+                : img,
             ),
           );
         });
@@ -84,7 +86,9 @@ export const App: React.FC = () => {
     />
   );
 
-  if (images.length === 0)
+  const noImages = images.length === 0;
+
+  if (noImages)
     return (
       <>
         {dropzone}
@@ -149,7 +153,7 @@ export const App: React.FC = () => {
           </Container>
         </header>
 
-        <main className="p-10">
+        <main className="py-10">
           <Container>
             <div className="py-6">
               <div className="flex flex-col space-y-14">

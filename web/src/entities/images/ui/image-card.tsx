@@ -28,14 +28,16 @@ export const ImageCard: React.FC<ImageCardProps> = ({
 
   return (
     <div key={image.id} className="relative group m-3">
-      <img
-        className="h-[12rem] rounded-xl"
-        src={image.url}
-        alt={`#${image.id}`}
-      />
+      <div className="bg-[#EFEFEF] min-w-[12rem] rounded-md">
+        <img
+          className="h-[12rem] rounded-xl m-auto"
+          src={image.url}
+          alt={`#${image.id}`}
+        />
+      </div>
 
       <div className="max-w-[7rem] absolute -top-3 right-4 bg-[#FCF6B1] rounded-md z-10 break-words p-1">
-        {image.label || `${day} ${month}`}
+        <span className="text-sm">{image.label || `${day} ${month}`}</span>
       </div>
 
       {isUploading ? (

@@ -4,15 +4,15 @@ import {
   Delete,
   Get,
   NotFoundException,
+  Param,
   Post,
   Put,
-  Query,
   Req,
   Session,
-  UploadedFiles,
+  UploadedFile,
   UseInterceptors,
 } from "@nestjs/common";
-import {FilesInterceptor} from "@nestjs/platform-express";
+import {FileInterceptor} from "@nestjs/platform-express";
 import {SessionWithData} from "express-session";
 import {extname} from "node:path";
 import fs from "node:fs";
@@ -30,13 +30,13 @@ export class ImagesController {
   @Get("/")
   async getImages(@Session() session: SessionWithData) {
     return {
-      images: session.images,
+      images: session.images || [],
     };
   }
 
   @Post("upload")
   @UseInterceptors(
-    FilesInterceptor("images", 10, {
+    FileInterceptor("image", {
       fileFilter(_, file, cb) {
         if (!file.mimetype.startsWith("image"))
           return cb(new Error("Only images are allowed"), false);
@@ -61,11 +61,11 @@ export class ImagesController {
     }),
   )
   uploadImage(
-    @UploadedFiles() files: Express.Multer.File[],
+    @UploadedFile() file: Express.Multer.File,
     @Session() session: SessionWithData,
     @Req() req: Request,
   ) {
-    const uploaded = files.map((file) => ({
+    const image = {
       id: nanoid(),
       url: url.format({
         protocol: req.protocol,
@@ -73,23 +73,31 @@ export class ImagesController {
         pathname: `${config.STATIC_PATH}/${file.filename}`,
       }),
       size: file.size,
-      note: "",
-    }));
+      label: "",
+      date: Date.now(),
+    };
 
-    session.images = [...(session.images || []), ...uploaded];
+    session.images = [...(session.images || []), image];
 
     return {
-      uploaded,
+      image,
     };
   }
 
   @Delete(":id")
-  removeImage(@Query("id") id: string, @Session() session: SessionWithData) {
+  removeImage(@Param("id") id: string, @Session() session: SessionWithData) {
     const image = session.images?.find((image) => image.id === id);
 
     if (!image) throw new NotFoundException("No image found");
 
     session.images = session.images?.filter((image) => image.id !== id);
+
+    fs.unlink(
+      `./uploads/${session.id}/${image.url.slice(image.url.lastIndexOf("/"))}`,
+      (exception) => {
+        if (exception) throw exception;
+      },
+    );
 
     return {
       image,
@@ -98,16 +106,16 @@ export class ImagesController {
 
   @Put(":id/note")
   saveNote(
-    @Query("id") id: string,
+    @Param("id") id: string,
     @Session() session: SessionWithData,
-    @Body() dto: dtos.SaveNoteDto,
+    @Body() dto: dtos.SaveLabelDto,
   ) {
     const image = session.images?.find((image) => image.id === id);
 
     if (!image) throw new NotFoundException("No image found");
 
-    session.images = session.images?.filter((image) =>
-      image.id === id ? {...image, note: dto.note} : image,
+    session.images = session.images?.map((image) =>
+      image.id === id ? {...image, label: dto.label} : image,
     );
 
     const updated = session.images.find((image) => image.id === id);

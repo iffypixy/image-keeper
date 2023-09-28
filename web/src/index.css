@@ -50,6 +50,26 @@
     url("./shared/assets/fonts/Inter-Black.woff2") format("woff2");
 }
 
+html {
+  font-size: 50%;
+
+  @media screen(md) {
+    font-size: 60%;
+  }
+
+  @media screen(lg) {
+    font-size: 70%;
+  }
+
+  @media screen(xl) {
+    font-size: 80%;
+  }
+
+  @media screen(2xl) {
+    font-size: 100%;
+  }
+}
+
 body {
   @apply font-body;
   @apply text-base;

@@ -9,7 +9,10 @@ import {config} from "@lib/config";
 import {AppModule} from "./app.module";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    // @todo: origin to .env
+    cors: {credentials: true, origin: "http://localhost:5173"},
+  });
 
   app.use(session());
 

@@ -8,8 +8,9 @@ declare module "express-session" {
       {
         id: string;
         url: string;
-        note: string;
+        label: string;
         size: number;
+        date: number;
       }[]
     >;
   }

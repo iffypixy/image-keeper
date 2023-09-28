@@ -1,6 +1,6 @@
 import {IsString} from "class-validator";
 
-export class SaveNoteDto {
+export class SaveLabelDto {
   @IsString()
-  note: string;
+  label: string;
 }

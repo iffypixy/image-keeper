@@ -1,1 +1,1 @@
-export {SaveNoteDto} from "./save-note.dto";
+export {SaveLabelDto} from "./save-label.dto";

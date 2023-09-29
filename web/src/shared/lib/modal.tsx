@@ -3,7 +3,7 @@ import {createPortal} from "react-dom";
 interface ModalProps {
   children?: React.ReactNode;
   open: boolean;
-  onClose?: () => void;
+  onClose: () => void;
 }
 
 export const Modal: React.FC<ModalProps> = ({children, open, onClose}) =>

@@ -11,8 +11,8 @@ import {
   groupImagesByMonth,
 } from "entities/images";
 import {Nullable} from "@shared/lib/types";
-import {ImageEditor} from "features/edit-image";
-import {DNDDropzone} from "features/dnd-images";
+import {ImageEditor} from "features/images/edit";
+import {DNDDropzone} from "features/images/dnd-upload";
 
 export const App: React.FC = () => {
   const [images, setImages] = React.useState<UploadedImage[]>([]);

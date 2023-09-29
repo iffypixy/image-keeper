@@ -2,6 +2,12 @@
 
 A web app for storing, deleting and labeling your images.
 
+## Important note
+
+Uploaded images are stored on disk, not in a cloud storage. 
+
+~~That's probably a subject to change.~~
+
 ## Getting started
 
 ### Requirements
